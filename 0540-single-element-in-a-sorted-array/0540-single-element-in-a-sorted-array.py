@@ -1,13 +1,17 @@
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
-        i = 0 
+        i = 0
         j = len(nums)-1
         while i < j:
-            if i< j and nums[i] !=nums[i+1]:
-                return nums[i]
-            if i< j and nums[j]  != nums[j-1]:
-                return nums[j]
-            j-=2
-            i+=2
+            mid = i+(j-i)//2
+            if mid % 2 == 1:
+                if nums[mid] == nums[mid-1]:
+                    i = mid+1
+                else:
+                    j = mid-1
+            else:
+                if nums[mid] == nums[mid+1]:
+                    i = mid+1
+                else:
+                    j = mid
         return nums[i]
-        
